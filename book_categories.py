@@ -2,8 +2,8 @@ from book import Book
 
 
 class Book_Categories(Book):
-    def __init__(self, title, author, ISBN, genre, publication_date):
-        super().__init__(title, author, ISBN, genre, publication_date)
+    def __init__(self, title, author, ISBN, publication_date):
+        super().__init__(title, author, ISBN, publication_date)
         self.categories = "n/a"
 
     def choose_category(self):

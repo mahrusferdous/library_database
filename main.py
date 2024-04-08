@@ -221,7 +221,7 @@ def genre_operations():
 print("\nWelcome to the Library Management System!")
 while True:
     print(
-        "\nMain Menu\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Quit"
+        "\nMain Menu\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Genre Operations\n5. Quit"
     )
     choice = handle_choice()
     if choice == 1:
@@ -231,7 +231,7 @@ while True:
     elif choice == 3:
         author_operations()
     elif choice == 4:
-        pass
+        genre_operations()
     elif choice == 5:
         print("Thank you for using the Library Management System!")
         break
