@@ -3,13 +3,9 @@ from user import User
 from author import Author
 from book import Book
 
-from genres_db import (
-    fetch_genre,
-    add_genres,
-    fetch_genres,
-)
+from genres_db import fetch_genre, add_genres, fetch_genres
+from author_db import fetch_authors, add_author, fetch_author
 
-# from author_db import fetch_authors, add_authors, delete_authors, update_authors
 # from book_db import fetch_books, add_books, delete_books, update_books
 # from user_db import fetch_users, add_users, delete_users, update_users
 
@@ -188,16 +184,12 @@ def author_operations():
     if choice == 1:
         name = input("Enter the name of the user: ")
         biography = input("Write a little bit about the author: ")
-        author = Author(name, biography)
-        author_list.append(author)
+        add_author(name, biography)
     elif choice == 2:
-        for author in author_list:
-            print(
-                f"Author's name is {author.get_name()} and Biography: {author.get_biography()}"
-            )
+        author = input("Enter the author you want to search for: ")
+        fetch_author(author)
     elif choice == 3:
-        for i in range(len(author_list)):
-            print(f"{i+1}. {author_list[i].get_name()}")
+        fetch_authors()
     else:
         print("Invalid choice. Please choose a valid option.")
         return

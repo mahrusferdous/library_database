@@ -1,7 +1,27 @@
 from connect_db import connect_db
 
 
-def fetch_author():
+def fetch_author(name=""):
+    conn = connect_db()
+
+    if conn:
+        try:
+            cursor = conn.cursor()
+
+            query = "SELECT * FROM Authors WHERE name = %s"
+            cursor.execute(query, (name,))
+
+            for row in cursor.fetchall():
+                print(row)
+
+        except Exception as e:
+            print(f"error: {e}")
+        finally:
+            cursor.close()
+            conn.close()
+
+
+def fetch_authors():
     conn = connect_db()
 
     if conn:
@@ -21,31 +41,23 @@ def fetch_author():
             conn.close()
 
 
-fetch_author()
-
-
-def add_author():
+def add_author(name, biography):
     conn = connect_db()
 
     if conn:
         try:
             cursor = conn.cursor()
 
-            name = ""
-            biography = ""
             query = "INSERT INTO Authors (name, biography) VALUES (%s, %s)"
-
             cursor.execute(query, (name, biography))
+
             conn.commit()
-            print(f"order was succesfully added for Omen")
+            print(f"Succesfully added for Author")
         except Exception as e:
             print(f"error: {e}")
         finally:
             cursor.close()
             conn.close()
-
-
-add_author()
 
 
 def delete_author():
@@ -70,9 +82,6 @@ def delete_author():
             conn.close()
 
 
-delete_author()
-
-
 def update_author():
     conn = connect_db()
     if conn:
@@ -93,6 +102,3 @@ def update_author():
         finally:
             cursor.close()
             conn.close()
-
-
-update_author()
