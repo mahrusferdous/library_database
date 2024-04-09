@@ -1,6 +1,26 @@
 from connect_db import connect_db
 
 
+def fetch_user(name):
+    conn = connect_db()
+
+    if conn:
+        try:
+            cursor = conn.cursor()
+
+            query = "SELECT * FROM Users WHERE name = %s"
+            cursor.execute(query, (name,))
+
+            for row in cursor.fetchall():
+                print(row)
+
+        except Exception as e:
+            print(f"error: {e}")
+        finally:
+            cursor.close()
+            conn.close()
+
+
 def fetch_users():
     conn = connect_db()
 
@@ -21,18 +41,13 @@ def fetch_users():
             conn.close()
 
 
-fetch_users()
-
-
-def add_users():
+def add_users(name, library_id):
     conn = connect_db()
 
     if conn:
         try:
             cursor = conn.cursor()
 
-            name = ""
-            library_id = ""
             query = "INSERT INTO Users (name, library_id) VALUES (%s, %s)"
 
             cursor.execute(query, (name, library_id))
@@ -43,9 +58,6 @@ def add_users():
         finally:
             cursor.close()
             conn.close()
-
-
-add_users()
 
 
 def delete_users():
@@ -70,9 +82,6 @@ def delete_users():
             conn.close()
 
 
-delete_users()
-
-
 def update_users():
     conn = connect_db()
     if conn:
@@ -93,6 +102,3 @@ def update_users():
         finally:
             cursor.close()
             conn.close()
-
-
-update_users()

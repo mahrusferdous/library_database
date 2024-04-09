@@ -5,9 +5,9 @@ from book import Book
 
 from genres_db import fetch_genre, add_genres, fetch_genres
 from author_db import fetch_authors, add_author, fetch_author
+from user_db import fetch_users, add_users, fetch_user
 
 # from book_db import fetch_books, add_books, delete_books, update_books
-# from user_db import fetch_users, add_users, delete_users, update_users
 
 
 books = {}
@@ -159,17 +159,16 @@ def user_operations():
     )
     choice = handle_choice()
     if choice == 1:
-        library_id = 0
+        count = 1
+        library_id = f"LIB{count}"
+        count += 1
         name = input("Enter the name of the user: ")
-        library_id += 1
-        user = User(name, library_id)
-        user_list.append(user)
+        add_users(name, library_id)
     elif choice == 2:
-        for user in user_list:
-            user.display_borrowed_books()
+        user = input("Enter the user you want to search for: ")
+        fetch_user(user)
     elif choice == 3:
-        for i in range(len(user_list)):
-            print(f"{i+1}. {user_list[i].get_name()}")
+        fetch_users()
     else:
         print("Invalid choice. Please choose a valid option.")
         return
