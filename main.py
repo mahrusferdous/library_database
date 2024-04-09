@@ -7,46 +7,46 @@ from genres_db import fetch_genre, add_genres, fetch_genres
 from author_db import fetch_authors, add_author, fetch_author
 from user_db import fetch_users, add_users, fetch_user
 
-# from book_db import fetch_books, add_books, delete_books, update_books
+from book_db import fetch_books, add_books, delete_books, update_books
 
 
-books = {}
+# books = {}
 
-book1 = Book_Categories(
-    "The Alchemist",
-    "Paulo Coelho",
-    "9780062315007",
-    "April 25, 2006",
-)
-book2 = Book_Categories(
-    "The Great Gatsby",
-    "F. Scott Fitzgerald",
-    "9780743273565",
-    "September 30, 2004",
-)
-book3 = Book_Categories(
-    "Harry Potter and the Philosopher's Stone",
-    "J.K. Rowling",
-    "9780743273565",
-    "September 30, 2004",
-)
-
-
-user1 = User("Tom Cat", 1)
-user2 = User("Jerry Mouse", 2)
-user1.set_borrowed_book(book1)
-user1.set_borrowed_book(book2)
+# book1 = Book_Categories(
+#     "The Alchemist",
+#     "Paulo Coelho",
+#     "9780062315007",
+#     "April 25, 2006",
+# )
+# book2 = Book_Categories(
+#     "The Great Gatsby",
+#     "F. Scott Fitzgerald",
+#     "9780743273565",
+#     "September 30, 2004",
+# )
+# book3 = Book_Categories(
+#     "Harry Potter and the Philosopher's Stone",
+#     "J.K. Rowling",
+#     "9780743273565",
+#     "September 30, 2004",
+# )
 
 
-author1 = Author(
-    "Paulo Coelho",
-    "Paulo Coelho was born in Rio de Janeiro, Brazil, in 1947.",
-)
-author2 = Author("F. Scott Fitzgerald", "F. Scott Fitzgerald was born in 1896.")
+# user1 = User("Tom Cat", 1)
+# user2 = User("Jerry Mouse", 2)
+# user1.set_borrowed_book(book1)
+# user1.set_borrowed_book(book2)
 
-user_list = [user1, user2]
-author_list = [author1, author2]
-books = [book1, book2, book3]
+
+# author1 = Author(
+#     "Paulo Coelho",
+#     "Paulo Coelho was born in Rio de Janeiro, Brazil, in 1947.",
+# )
+# author2 = Author("F. Scott Fitzgerald", "F. Scott Fitzgerald was born in 1896.")
+
+# user_list = [user1, user2]
+# author_list = [author1, author2]
+# books = [book1, book2, book3]
 
 
 def handle_choice():
@@ -68,84 +68,88 @@ def book_operations():
     )
     choice = handle_choice()
     if choice == 1:
-        title = input("Enter the title of the book: ")
-        author = input("Enter the author of the book: ")
-        ISBN = input("Enter the ISBN of the book: ")
-        publication_date = input("Enter the publication date of the book: ")
-        book = Book(title, author, ISBN, publication_date)
-        books.append(book)
+        # title = input("Enter the title of the book: ")
+        # author = input("Enter the author of the book: ")
+        # ISBN = input("Enter the ISBN of the book: ")
+        # publication_date = input("Enter the publication date of the book: ")
+        # book = Book(title, author, ISBN, publication_date)
+        # books.append(book)
+        pass
 
     elif choice == 2:
-        print()
-        # Display all books
-        for i in range(len(books)):
-            if books[i].get_availability():
-                print(f"{i+1}. {books[i].get_title()}")
-        # Input
-        try:
-            book_num = int(
-                input("Enter the title number of the book you want to borrow: ")
-            )
-            user_name = input("Enter your name: ")
-        except ValueError:
-            print("Invalid choice. Please choose a valid option.")
-            return
-        except Exception as e:
-            print(e)
-            return
+        # print()
+        # # Display all books
+        # for i in range(len(books)):
+        #     if books[i].get_availability():
+        #         print(f"{i+1}. {books[i].get_title()}")
+        # # Input
+        # try:
+        #     book_num = int(
+        #         input("Enter the title number of the book you want to borrow: ")
+        #     )
+        #     user_name = input("Enter your name: ")
+        # except ValueError:
+        #     print("Invalid choice. Please choose a valid option.")
+        #     return
+        # except Exception as e:
+        #     print(e)
+        #     return
 
-        # if book available
-        if books[book_num - 1].get_availability():
-            # if user exists
-            user = None
-            for user_obj in user_list:
-                if user_name == user_obj.get_name():
-                    user = user_obj
-                    break
-        # borrow book
-        if user:
-            user.set_borrowed_book(books[book_num - 1])
-            books[book_num - 1].borrow_book()
+        # # if book available
+        # if books[book_num - 1].get_availability():
+        #     # if user exists
+        #     user = None
+        #     for user_obj in user_list:
+        #         if user_name == user_obj.get_name():
+        #             user = user_obj
+        #             break
+        # # borrow book
+        # if user:
+        #     user.set_borrowed_book(books[book_num - 1])
+        #     books[book_num - 1].borrow_book()
+        pass
     elif choice == 3:
-        print()
-        try:
+        # print()
+        # try:
 
-            in_book = input("Enter the title of the book you want to return: ")
-            user_name = input("Enter your name: ")
-            user = None
-            for user_obj in user_list:
-                if user_name == user_obj.get_name():
-                    user = user_obj
-                    break
+        #     in_book = input("Enter the title of the book you want to return: ")
+        #     user_name = input("Enter your name: ")
+        #     user = None
+        #     for user_obj in user_list:
+        #         if user_name == user_obj.get_name():
+        #             user = user_obj
+        #             break
 
-            if user:
-                for borrowed_book in user.get_borrowed_book():
-                    if borrowed_book.get_title() == in_book:
-                        user.remove_borrowed_book(borrowed_book)
-                        borrowed_book.return_book()
-                        break
+        #     if user:
+        #         for borrowed_book in user.get_borrowed_book():
+        #             if borrowed_book.get_title() == in_book:
+        #                 user.remove_borrowed_book(borrowed_book)
+        #                 borrowed_book.return_book()
+        #                 break
 
-        except Exception as e:
-            print(e)
-            return
-
+        # except Exception as e:
+        #     print(e)
+        #     return
+        pass
     elif choice == 4:
-        book = input("Enter the title of the book you want to search for: ")
-        print()
-        for i in range(len(books)):
-            if book == books[i].get_title():
-                print(
-                    f"Book title: {books[i].get_title()}\nAuthor: {books[i].get_author()}\nISBN: {books[i].get_ISBN()}\nGenre: {books[i].get_genre()}\nPublication Date: {books[i].get_publication_date()}"
-                )
-                return
-        print("Book not found.")
+        # book = input("Enter the title of the book you want to search for: ")
+        # print()
+        # for i in range(len(books)):
+        #     if book == books[i].get_title():
+        #         print(
+        #             f"Book title: {books[i].get_title()}\nAuthor: {books[i].get_author()}\nISBN: {books[i].get_ISBN()}\nGenre: {books[i].get_genre()}\nPublication Date: {books[i].get_publication_date()}"
+        #         )
+        #         return
+        # print("Book not found.")
+        pass
 
     elif choice == 5:
-        print()
-        for i in range(len(books)):
-            print(f"{i}. {books[i].get_title()}")
-        for book in user_list:
-            book.display_borrowed_books()
+        # print()
+        # for i in range(len(books)):
+        #     print(f"{i}. {books[i].get_title()}")
+        # for book in user_list:
+        #     book.display_borrowed_books()
+        pass
 
     else:
         print("Invalid choice. Please choose a valid option.")

@@ -1,0 +1,91 @@
+CREATE DATABASE library_db;
+
+use library_db;
+
+CREATE TABLE authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    biography TEXT
+);
+
+CREATE TABLE genres (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(50)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    library_id VARCHAR(10) NOT NULL UNIQUE
+);
+
+CREATE TABLE books(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author_id INT,
+    genre_id INT,
+    isbn VARCHAR(13) NOT NULL,
+    publication_date DATE,
+    availability BOOLEAN DEFAULT 1,
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
+
+CREATE TABLE borrowed_books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    book_id INT,
+    borrow_date DATE NOT NULL,
+    return_date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Mock data for authors table
+INSERT INTO authors (name, biography) VALUES
+('J.K. Rowling', 'J.K. Rowling is a British author best known for her Harry Potter series.'),
+('George Orwell', 'George Orwell was an English novelist and essayist, known for his works "1984" and "Animal Farm."'),
+('Agatha Christie', 'Agatha Christie was an English writer known for her detective novels.'),
+('Harper Lee', 'Harper Lee was an American novelist best known for her Pulitzer Prize-winning novel "To Kill a Mockingbird."'),
+('J.R.R. Tolkien', 'J.R.R. Tolkien was an English writer, poet, philologist, and university professor, best known for his fantasy works.');
+
+-- Mock data for genres table
+INSERT INTO genres (name, description, category) VALUES
+('Fantasy', 'Fantasy is a genre of speculative fiction set in a fictional universe.', 'Fiction'),
+('Mystery', 'Mystery fiction is a genre of fiction that revolves around the solution of a crime.', 'Fiction'),
+('Science Fiction', 'Science fiction is a genre of speculative fiction that explores imaginative and futuristic concepts.', 'Fiction'),
+('Literary Fiction', 'Literary fiction is a term used to distinguish certain fictional works that possess commonly held qualities to readers outside genre fiction.', 'Fiction'),
+('Non-fiction', 'Non-fiction is a genre of writing that is based on facts, real events, and real people, such as biography or history.', 'Non-fiction');
+
+-- Mock data for users table
+INSERT INTO users (name, library_id) VALUES
+('Alice Smith', 'LIB001'),
+('Bob Johnson', 'LIB002'),
+('Charlie Brown', 'LIB003'),
+('Diana Garcia', 'LIB004'),
+('Eve Wilson', 'LIB005');
+
+-- Mock data for books table
+INSERT INTO books (title, author_id, genre_id, isbn, publication_date, availability) VALUES
+('Harry Potter and the Philosopher''s Stone', 1, 1, '9780747532743', '1997-06-26', 1),
+('1984', 2, 3, '9780451524935', '1949-06-08', 1),
+('Murder on the Orient Express', 3, 2, '9780062073501', '1934-01-01', 1),
+('To Kill a Mockingbird', 4, 4, '9780061120084', '1960-07-11', 1),
+('The Hobbit', 5, 1, '9780547928227', '1937-09-21', 1);
+
+-- Mock data for borrowed_books table
+INSERT INTO borrowed_books (user_id, book_id, borrow_date, return_date) VALUES
+(1, 1, '2024-04-01', '2024-04-15'),
+(2, 2, '2024-04-02', NULL),
+(3, 3, '2024-04-03', NULL),
+(4, 4, '2024-04-04', NULL),
+(5, 5, '2024-04-05', NULL);
+
+select * from authors;
+select * from Genres;
+select * from Users;
+select * from Books;
+select * from borrowed_books;
+
