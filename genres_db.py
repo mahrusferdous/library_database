@@ -21,7 +21,8 @@ def fetch_genres():
             conn.close()
 
 
-fetch_genres()
+if __name__ == "__main__":
+    fetch_genres()
 
 
 def add_genres():
@@ -48,7 +49,8 @@ def add_genres():
             conn.close()
 
 
-add_genres()
+if __name__ == "__main__":
+    add_genres()
 
 
 def delete_genres():
@@ -74,7 +76,8 @@ def delete_genres():
             conn.close()
 
 
-delete_genres()
+if __name__ == "__main__":
+    delete_genres()
 
 
 def update_genres():
@@ -102,4 +105,5 @@ def update_genres():
             conn.close()
 
 
-update_genres()
+if __name__ == "__main__":
+    update_genres()

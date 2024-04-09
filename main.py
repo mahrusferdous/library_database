@@ -3,6 +3,13 @@ from user import User
 from author import Author
 from book import Book
 
+from genres_db import fetch_genres, add_genres, delete_genres, update_genres
+
+# from author_db import fetch_authors, add_authors, delete_authors, update_authors
+# from book_db import fetch_books, add_books, delete_books, update_books
+# from user_db import fetch_users, add_users, delete_users, update_users
+
+
 books = {}
 
 book1 = Book_Categories(
