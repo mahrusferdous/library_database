@@ -3,7 +3,11 @@ from user import User
 from author import Author
 from book import Book
 
-from genres_db import fetch_genres, add_genres, delete_genres, update_genres
+from genres_db import (
+    fetch_genre,
+    add_genres,
+    fetch_genres,
+)
 
 # from author_db import fetch_authors, add_authors, delete_authors, update_authors
 # from book_db import fetch_books, add_books, delete_books, update_books
@@ -206,22 +210,15 @@ def genre_operations():
     )
     choice = handle_choice()
     if choice == 1:
-        title = input("Enter the title of the book you want to choose a category for: ")
-        for book in books:
-            if book.get_title() == title:
-                book.choose_category()
+        name = input("Enter the name of the book: ")
+        description = input("Enter the description of the book: ")
+        category = input("Enter the genre of the book: ")
+        add_genres(name, description, category)
     elif choice == 2:
         genre = input("Enter the genre you want to search for: ")
-        for book in books:
-            if book.get_categories() == genre:
-                print(
-                    f"Book title: {book.get_title()}\nAuthor: {book.get_author()}\nISBN: {book.get_ISBN()}\nGenre: {book.get_categories()}\nPublication Date: {book.get_publication_date()}"
-                )
+        fetch_genre(genre)
     elif choice == 3:
-        for book in books:
-            print(
-                f"Book title: {book.get_title()}\nAuthor: {book.get_author()}\nISBN: {book.get_ISBN()}\nGenre: {book.get_categories()}\nPublication Date: {book.get_publication_date()}"
-            )
+        fetch_genres()
 
 
 # Main functionality

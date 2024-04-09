@@ -1,6 +1,25 @@
 from connect_db import connect_db
 
 
+def fetch_genre(name=""):
+    conn = connect_db()
+
+    if conn:
+        try:
+            cursor = conn.cursor()
+
+            query = "SELECT * FROM Genres WHERE name = %s"
+            cursor.execute(query, (name,))
+
+            print(cursor.fetchall())
+
+        except Exception as e:
+            print(f"error: {e}")
+        finally:
+            cursor.close()
+            conn.close()
+
+
 def fetch_genres():
     conn = connect_db()
 
@@ -21,36 +40,25 @@ def fetch_genres():
             conn.close()
 
 
-if __name__ == "__main__":
-    fetch_genres()
-
-
-def add_genres():
+def add_genres(name="", description="", category=""):
     conn = connect_db()
 
     if conn:
         try:
             cursor = conn.cursor()
 
-            name = ""
-            description = ""
-            category = ""
             query = (
                 "INSERT INTO Genres (name, description, category) VALUES (%s, %s, %s)"
             )
 
             cursor.execute(query, (name, description, category))
             conn.commit()
-            print(f"order was succesfully added for Omen")
+            print(f"Succesfully added for Genres")
         except Exception as e:
             print(f"error: {e}")
         finally:
             cursor.close()
             conn.close()
-
-
-if __name__ == "__main__":
-    add_genres()
 
 
 def delete_genres():
@@ -66,7 +74,7 @@ def delete_genres():
 
             cursor.execute(query, (name, description, category))
             conn.commit()
-            print("Your order was successfully deleted!")
+            print("Successfully deleted!")
 
         except Exception as e:
             print(f"and error occurred: {e}")
@@ -74,10 +82,6 @@ def delete_genres():
         finally:
             cursor.close()
             conn.close()
-
-
-if __name__ == "__main__":
-    delete_genres()
 
 
 def update_genres():
@@ -95,7 +99,7 @@ def update_genres():
 
             cursor.execute(query, (category, name, description))
             conn.commit()
-            print("Your order was succesfully updated!")
+            print("Succesfully updated!")
 
         except Exception as e:
             print(f"and error occurred: {e}")
@@ -103,7 +107,3 @@ def update_genres():
         finally:
             cursor.close()
             conn.close()
-
-
-if __name__ == "__main__":
-    update_genres()
