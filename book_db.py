@@ -55,7 +55,6 @@ def add_books(title, isbn, publication_date, availability):
                 (title, isbn, publication_date, availability),
             )
             conn.commit()
-            print(f"order was succesfully added for Omen")
         except Exception as e:
             print(f"error: {e}")
         finally:
@@ -104,7 +103,6 @@ def update_books(title, availability):
                 (availability, title),
             )
             conn.commit()
-            print("Your order was succesfully updated!")
 
         except Exception as e:
             print(f"and error occurred: {e}")

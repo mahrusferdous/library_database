@@ -69,16 +69,11 @@ def book_operations():
     choice = handle_choice()
     if choice == 1:
         title = input("Enter the title of the book: ")
-        author = input("Enter the author of the book: ")
+        # author = input("Enter the author of the book: ")
         ISBN = input("Enter the ISBN of the book: ")
         publication_date = input("Enter the publication date of the book: ")
-        book = Book(title, author, ISBN, publication_date)
-        add_books(
-            book.get_title(),
-            book.get_ISBN(),
-            book.get_publication_date(),
-            book.get_availability(),
-        )
+        # book = Book(title, author, ISBN, publication_date)
+        add_books(title, ISBN, publication_date, True)
 
     elif choice == 2:
         book_title = input("Enter the title of the book you want to borrow: ")
@@ -88,9 +83,7 @@ def book_operations():
                 book_info[0]
             )
             if availability:
-                book = Book(title, author_id, isbn, publication_date)
-                book.borrow_book()
-                update_books(book.get_title(), False)
+                update_books(title, False)
                 print(f"You have borrowed '{title}'. Enjoy your reading!")
             else:
                 print("Sorry, the book is currently not available.")
@@ -101,15 +94,13 @@ def book_operations():
 
     elif choice == 3:
         book = input("Enter the title of the book you want to return: ")
-        book_info = fetch_book(book[0])
+        book_info = fetch_book(book)
         if book_info is not None:
             id, title, author_id, genere_id, isbn, publication_date, availability = (
-                book_info
+                book_info[0]
             )
             if not availability:
-                book = Book(title, author_id, isbn, publication_date)
-                book.return_book()
-                update_books(book.get_title(), book.get_availability())
+                update_books(title, True)
                 print(f"Thank you for returning '{title}'.")
             else:
                 print("The book is already available in the library.")
@@ -120,9 +111,9 @@ def book_operations():
 
     elif choice == 4:
         book = input("Enter the title of the book you want to search for: ")
-        main_book = fetch_book(book[0])
+        main_book = fetch_book(book)
         if main_book is not None:
-            print(main_book)
+            print(main_book[0])
         else:
             print(
                 "Book not found in the library. Please check the title and try again."

@@ -12,8 +12,6 @@ def connect_db():
         conn = mysql.connector.connect(
             database=db_name, user=user, password=password, host=host
         )
-
-        print("Connected Succesfully")
         return conn
 
     except mysql.connector.Error as e:
