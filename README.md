@@ -23,8 +23,14 @@ Main Menu:
     1. Add a new author
     2. View author details
     3. Display all authors
-4. Quit
+4. Genre Operations
+    1. Add a new genre
+    2. View genre details
+    3. Display all genres
+5. Quit
 
 ## NOTE
-- Straight forward as the instructions display
-- Might have some type exceptions 
+
+- The DB can be created by pasting the code from -dbquries.txt- into your MySQL Workbench
+- The system is designed to be user-friendly
+- Code should be readable and user friendly 
