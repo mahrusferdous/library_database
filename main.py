@@ -7,7 +7,7 @@ from genres_db import fetch_genre, add_genres, fetch_genres
 from author_db import fetch_authors, add_author, fetch_author
 from user_db import fetch_users, add_users, fetch_user
 
-from book_db import fetch_books, add_books, delete_books, update_books
+from book_db import fetch_books, fetch_book, add_books, update_books
 
 
 # books = {}
@@ -68,88 +68,68 @@ def book_operations():
     )
     choice = handle_choice()
     if choice == 1:
-        # title = input("Enter the title of the book: ")
-        # author = input("Enter the author of the book: ")
-        # ISBN = input("Enter the ISBN of the book: ")
-        # publication_date = input("Enter the publication date of the book: ")
-        # book = Book(title, author, ISBN, publication_date)
-        # books.append(book)
-        pass
+        title = input("Enter the title of the book: ")
+        author = input("Enter the author of the book: ")
+        ISBN = input("Enter the ISBN of the book: ")
+        publication_date = input("Enter the publication date of the book: ")
+        book = Book(title, author, ISBN, publication_date)
+        add_books(
+            book.get_title(),
+            book.get_ISBN(),
+            book.get_publication_date(),
+            book.get_availability(),
+        )
 
     elif choice == 2:
-        # print()
-        # # Display all books
-        # for i in range(len(books)):
-        #     if books[i].get_availability():
-        #         print(f"{i+1}. {books[i].get_title()}")
-        # # Input
-        # try:
-        #     book_num = int(
-        #         input("Enter the title number of the book you want to borrow: ")
-        #     )
-        #     user_name = input("Enter your name: ")
-        # except ValueError:
-        #     print("Invalid choice. Please choose a valid option.")
-        #     return
-        # except Exception as e:
-        #     print(e)
-        #     return
+        book_title = input("Enter the title of the book you want to borrow: ")
+        book_info = fetch_book(book_title)
+        if book_info is not None:
+            id, title, author_id, genre_id, isbn, publication_date, availability = (
+                book_info[0]
+            )
+            if availability:
+                book = Book(title, author_id, isbn, publication_date)
+                book.borrow_book()
+                update_books(book.get_title(), False)
+                print(f"You have borrowed '{title}'. Enjoy your reading!")
+            else:
+                print("Sorry, the book is currently not available.")
+        else:
+            print(
+                "Book not found in the library. Please check the title and try again."
+            )
 
-        # # if book available
-        # if books[book_num - 1].get_availability():
-        #     # if user exists
-        #     user = None
-        #     for user_obj in user_list:
-        #         if user_name == user_obj.get_name():
-        #             user = user_obj
-        #             break
-        # # borrow book
-        # if user:
-        #     user.set_borrowed_book(books[book_num - 1])
-        #     books[book_num - 1].borrow_book()
-        pass
     elif choice == 3:
-        # print()
-        # try:
+        book = input("Enter the title of the book you want to return: ")
+        book_info = fetch_book(book[0])
+        if book_info is not None:
+            id, title, author_id, genere_id, isbn, publication_date, availability = (
+                book_info
+            )
+            if not availability:
+                book = Book(title, author_id, isbn, publication_date)
+                book.return_book()
+                update_books(book.get_title(), book.get_availability())
+                print(f"Thank you for returning '{title}'.")
+            else:
+                print("The book is already available in the library.")
+        else:
+            print(
+                "Book not found in the library. Please check the title and try again."
+            )
 
-        #     in_book = input("Enter the title of the book you want to return: ")
-        #     user_name = input("Enter your name: ")
-        #     user = None
-        #     for user_obj in user_list:
-        #         if user_name == user_obj.get_name():
-        #             user = user_obj
-        #             break
-
-        #     if user:
-        #         for borrowed_book in user.get_borrowed_book():
-        #             if borrowed_book.get_title() == in_book:
-        #                 user.remove_borrowed_book(borrowed_book)
-        #                 borrowed_book.return_book()
-        #                 break
-
-        # except Exception as e:
-        #     print(e)
-        #     return
-        pass
     elif choice == 4:
-        # book = input("Enter the title of the book you want to search for: ")
-        # print()
-        # for i in range(len(books)):
-        #     if book == books[i].get_title():
-        #         print(
-        #             f"Book title: {books[i].get_title()}\nAuthor: {books[i].get_author()}\nISBN: {books[i].get_ISBN()}\nGenre: {books[i].get_genre()}\nPublication Date: {books[i].get_publication_date()}"
-        #         )
-        #         return
-        # print("Book not found.")
-        pass
+        book = input("Enter the title of the book you want to search for: ")
+        main_book = fetch_book(book[0])
+        if main_book is not None:
+            print(main_book)
+        else:
+            print(
+                "Book not found in the library. Please check the title and try again."
+            )
 
     elif choice == 5:
-        # print()
-        # for i in range(len(books)):
-        #     print(f"{i}. {books[i].get_title()}")
-        # for book in user_list:
-        #     book.display_borrowed_books()
-        pass
+        fetch_books()
 
     else:
         print("Invalid choice. Please choose a valid option.")
