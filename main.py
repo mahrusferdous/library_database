@@ -2,6 +2,7 @@ from book_categories import Book_Categories
 from user import User
 from author import Author
 from book import Book
+from datetime import datetime
 
 from genres_db import fetch_genre, add_genres, fetch_genres
 from author_db import fetch_authors, add_author, fetch_author
@@ -71,8 +72,9 @@ def book_operations():
         title = input("Enter the title of the book: ")
         # author = input("Enter the author of the book: ")
         ISBN = input("Enter the ISBN of the book: ")
-        publication_date = input("Enter the publication date of the book: ")
+        date = input("Enter the publication date of the book: (YYYY-MM-DD) ")
         # book = Book(title, author, ISBN, publication_date)
+        publication_date = datetime.strptime(date, "%Y-%m-%d")
         add_books(title, ISBN, publication_date, True)
 
     elif choice == 2:
